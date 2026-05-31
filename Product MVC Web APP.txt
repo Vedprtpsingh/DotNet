@@ -1,0 +1,57 @@
+Required Packages- IF using Microsoft Visual Studio 2022 then use versions 9.X.X
+1. Microsoft.EntityFrameworkCore
+2. Microsoft.EntityFrameworkCore.SqlServer
+3. Microsoft.EntityFrameworkCore.Tools
+4. Microsoft.VisualStudio.Web.CodeGeneration.Design if fails then use v8.x.x
+
+Entity
+
+1. Microsoft.EntityFrameworkCore
+2. Microsoft.EntityFrameworkCore.SqlServer
+3. Microsoft.EntityFrameworkCore.Tools
+4. Microsoft.EntityFrameworkCore.Design
+
+Ado:
+ Microsoft.Data.SqlClient
+
+Product MVC Web APP
+
+
+1. Create New Project
+2. Select ASP .NET Core Web App (Model-View-Controller) Template
+3. MVC folders auto-created.
+4. Right Click on Models -> Add-> New Item -> file_name.cs
+5. Models → Add → Class → ProductContext.cs
+6. Add DB Connection String in appsettings.json for localdb
+
+  "ConnectionStrings": {
+    "ProductDB": "Server=(localdb)\\MSSQLLocalDB;Database=ProductDB;Trusted_Connection=True;"
+  }
+
+7. Add this in Program.cs just after builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ProductContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ProductDB")));
+
+8. Run in Package Manager Console: Tools → NuGet Package Manager → Package Manager Console
+Add-Migration InitialCreate
+Update-Database
+
+9. Controllers → Right Click -> Add → Controller
+   Select: MVC Controller with views, using Entity Framework
+
+10. Click Add
+
+11. Select Model Class -> Product
+
+12. Select DBContext class -> ProductContext 
+
+13. Click Add
+
+All the Views (CRUD) with ProductController are created successfully.
+
+14. Run application using IIS Express 
+
+15. Enter /Products in the browser -> https://localhost:44332/products
+
+
